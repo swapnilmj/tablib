@@ -47,6 +47,14 @@ class TablibTestCase(unittest.TestCase):
         self.assertTrue(data.width == len(new_row))
         self.assertTrue(data[0] == new_row)
 
+    def test_dict_append(self):
+        data.headers = ('name', 'age')
+        new_row = {'name': 'Junio', 'age': 30}
+        data.append(new_row)
+
+        self.assertTrue(data.width == len(new_row))
+        self.assertTrue(data[-1] == ('Junio', 30))
+
     def test_empty_append_with_headers(self):
         """Verify append() correctly detects mismatch of number of
         headers and data.

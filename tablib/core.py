@@ -655,8 +655,19 @@ class Dataset(object):
         object at the given index.
        """
 
+        if isinstance(row, dict):
+            row = self._dictrow2list(row)
+
         self._validate(row)
         self._data.insert(index, Row(row, tags=tags))
+
+    def _dictrow2list(self, dictrow):
+        headers = self._get_headers()
+        out = []
+        for h in headers:
+            i = dictrow.get(h)
+            out.append(i)
+        return out
 
 
     def rpush(self, row, tags=list()):
